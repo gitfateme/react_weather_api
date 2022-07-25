@@ -1,0 +1,17 @@
+.Hero .hero-background {
+    background: linear-gradient(101.56deg, #4f7ffa 17.75%, #335fd1 84.8%);
+    color: white;
+    border-radius: 12px
+}
+
+.Hero h1, h2 {
+    font-weight: 600;
+}
+
+.Hero h2 {
+    font-size: 4rem;
+}
+
+.Hero h1 {
+    font-size: 2.75rem;
+}
