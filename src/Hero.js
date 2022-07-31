@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/Hero.css";
 
-function Hero() {
+function Hero(props) {
   return (
     <div className="row Hero">
       <div className="col-lg-8 offset-lg-2 border hero-background text-center p-5 ">
@@ -15,7 +15,7 @@ function Hero() {
           />
           <h3>Few Clouds</h3>
         </div>
-        <h1 className="pt-3">London</h1>
+        <h1 className="pt-3">{props.city}</h1>
       </div>
     </div>
   );

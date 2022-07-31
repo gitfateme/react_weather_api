@@ -1,12 +1,10 @@
-
-
 .Header input {
-    width:100%;
-    border-radius:6px;
+  width: 100%;
+  border-radius: 6px;
 }
 
-.Header .search-icon{
-    font-size: 1.3rem;
-    right:10px;
-    top:10px;
+.Header .search-icon {
+  font-size: 1.3rem;
+  left: 12px;
+  top: 12px;
 }
