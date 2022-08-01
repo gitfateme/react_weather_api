@@ -7,13 +7,13 @@ function Hero(props) {
     <div className="row Hero">
       <div className="col-lg-8 offset-lg-2 border hero-background text-center p-5 ">
         <p>Saturday, 25 July, 2022, 15:24</p>
-        <h2>30°C</h2>
+        <h2>{props.temp}°C</h2>
         <div className="d-flex  align-items-center justify-content-center">
           <img
-            src="https://openweathermap.org/img/wn/02d@2x.png"
+            src={`https://www.weatherbit.io/static/img/icons/${props.icon}.png`}
             alt="Weather"
           />
-          <h3>Few Clouds</h3>
+          <h3>{props.weatherDescription}</h3>
         </div>
         <h1 className="pt-3">{props.city}</h1>
       </div>

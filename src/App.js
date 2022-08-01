@@ -13,7 +13,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       city: "",
-      heroCity: "London",
+      heroCity: "Garmsar",
+      currentTemp: 25,
+      heroIcon: "c02d",
+      countryCode: "IR",
+      description: "Few Clouds",
+      humidity: 15,
+      windSpeed: 2,
     };
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
@@ -23,27 +29,47 @@ class App extends React.Component {
     this.setState({ city: searchValue });
   }
 
-  handleSearchSubmit(city) {
+  handleSearchSubmit() {
     let showTemperature = (r) => {
       console.log(r.data);
-      this.setState({ heroCity: r.data.name });
+      this.setState({
+        heroCity: r.data.data[0].city_name,
+        currentTemp: Math.round(r.data.data[0].temp),
+        heroIcon: r.data.data[0].weather.icon,
+        countryCode: r.data.data[0].country_code,
+        description: r.data.data[0].weather.description,
+        humidity: Math.round(r.data.data[0].rh),
+        windSpeed: Math.round(r.data.data[0].wind_spd),
+      });
     };
 
-    console.log(city);
-    let apiKey = "20c9277c0c1a5b967be7ce712a171f19";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=${apiKey}&units=metric`;
+    let apiKey = "0ec94f57e4c94d43a27eb573d1806275";
+    let apiUrl = `https://api.weatherbit.io/v2.0/current?city=${this.state.city}&key=${apiKey}`;
     axios.get(apiUrl).then(showTemperature);
   }
 
   render() {
     const heroCity = this.state.heroCity;
+    const currentTemp = this.state.currentTemp;
+    const heroIcon = this.state.heroIcon;
+    const countryCode = this.state.countryCode;
+    const description = this.state.description;
+    const humidity = this.state.humidity;
+    const windSpeed = this.state.windSpeed;
     return (
       <div className="App container ">
         <Header
           onSearchInputChange={this.handleSearchInputChange}
           onSearchInpuSubmit={this.handleSearchSubmit}
+          country={countryCode}
+          city={heroCity}
         />
-        <Hero city={heroCity} />
+        <Hero
+          city={heroCity}
+          temp={currentTemp}
+          icon={heroIcon}
+          weatherDescription={description}
+        />
         <div className="col-lg-8 offset-lg-2 p-0">
           <div className="row">
             <WeatherCard />
@@ -52,7 +78,7 @@ class App extends React.Component {
             <WeatherCard />
           </div>
         </div>
-        <HumidityWind />
+        <HumidityWind humidity={humidity} wind={windSpeed} />
         <Footer />
       </div>
     );

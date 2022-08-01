@@ -21,8 +21,8 @@ class Header extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.onSearchInpuSubmit(e.target[0].value);
+    e.target[0].value = "";
   }
-
 
   render() {
     return (
@@ -31,7 +31,8 @@ class Header extends React.Component {
           <div className="row">
             <div className="col-6 d-none d-sm-block p-3">
               <span>
-                <FontAwesomeIcon icon={faLocationDot} /> London, UK
+                <FontAwesomeIcon icon={faLocationDot} /> {this.props.city},{" "}
+                {this.props.country}
               </span>
             </div>
             <div className="col-10  offset-1 text-center offset-sm-0 col-sm-6 text-sm-end pe-0 p-1">
@@ -44,10 +45,10 @@ class Header extends React.Component {
                     onChange={this.handleChange}
                   />
                 </form>
-                  <FontAwesomeIcon
-                    icon={faMagnifyingGlass}
-                    className="search-icon position-absolute"
-                  />
+                <FontAwesomeIcon
+                  icon={faMagnifyingGlass}
+                  className="search-icon position-absolute"
+                />
               </div>
             </div>
           </div>
