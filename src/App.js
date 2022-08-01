@@ -12,27 +12,81 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      city: "",
-      heroCity: "Garmsar",
-      currentTemp: 25,
-      heroIcon: "c02d",
-      countryCode: "IR",
-      description: "Few Clouds",
-      humidity: 15,
-      windSpeed: 2,
+      loading: true,
+      date: "",
+      city: "tokyo",
+      heroCity: "",
+      currentTemp: null,
+      heroIcon: "",
+      countryCode: "",
+      description: "",
+      humidity: null,
+      windSpeed: null,
     };
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+  }
+  componentDidMount() {
+    console.log("component did mount");
+    this.handleSearchSubmit();
   }
 
   handleSearchInputChange(searchValue) {
     this.setState({ city: searchValue });
   }
 
+  showDate() {
+    let months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    let days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    let now = new Date();
+    let year = now.getFullYear();
+    let month = months[now.getMonth()];
+    let day = now.getDay();
+    let weekDay = days[now.getDay()];
+    function getHour() {
+      let newHour = now.getHours();
+      if (newHour < 10) {
+        newHour = `0${newHour}`;
+      }
+      return newHour;
+    }
+    function getMinute() {
+      let newMin = now.getMinutes();
+      if (newMin < 10) {
+        newMin = `0${newMin}`;
+      }
+      return newMin;
+    }
+
+    return `${weekDay}, ${day} ${month}, ${year}, ${getHour()}:${getMinute()}`;
+  }
+
   handleSearchSubmit() {
     let showTemperature = (r) => {
       console.log(r.data);
       this.setState({
+        loading: false,
         heroCity: r.data.data[0].city_name,
         currentTemp: Math.round(r.data.data[0].temp),
         heroIcon: r.data.data[0].weather.icon,
@@ -40,8 +94,10 @@ class App extends React.Component {
         description: r.data.data[0].weather.description,
         humidity: Math.round(r.data.data[0].rh),
         windSpeed: Math.round(r.data.data[0].wind_spd),
+        date: this.showDate(),
       });
     };
+    console.log("test");
 
     let apiKey = "0ec94f57e4c94d43a27eb573d1806275";
     let apiUrl = `https://api.weatherbit.io/v2.0/current?city=${this.state.city}&key=${apiKey}`;
@@ -56,6 +112,8 @@ class App extends React.Component {
     const description = this.state.description;
     const humidity = this.state.humidity;
     const windSpeed = this.state.windSpeed;
+    const loading = this.state.loading;
+    const date = this.state.date;
     return (
       <div className="App container ">
         <Header
@@ -63,12 +121,15 @@ class App extends React.Component {
           onSearchInpuSubmit={this.handleSearchSubmit}
           country={countryCode}
           city={heroCity}
+          loading={loading}
         />
         <Hero
           city={heroCity}
           temp={currentTemp}
           icon={heroIcon}
           weatherDescription={description}
+          loading={loading}
+          date={date}
         />
         <div className="col-lg-8 offset-lg-2 p-0">
           <div className="row">
