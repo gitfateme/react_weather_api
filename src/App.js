@@ -32,7 +32,11 @@ class App extends React.Component {
   }
 
   handleSearchInputChange(searchValue) {
-    this.setState({ city: searchValue });
+    if (searchValue === 'karaj') {
+      this.setState({ city: "krj" });
+    } else {
+      this.setState({ city: searchValue });
+    }
   }
 
   showDate() {
@@ -101,6 +105,7 @@ class App extends React.Component {
 
     let apiKey = "0ec94f57e4c94d43a27eb573d1806275";
     let apiUrl = `https://api.weatherbit.io/v2.0/current?city=${this.state.city}&key=${apiKey}`;
+    console.log(apiUrl);
     axios.get(apiUrl).then(showTemperature);
   }
 
