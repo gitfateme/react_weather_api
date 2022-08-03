@@ -103,7 +103,7 @@ class App extends React.Component {
     };
     console.log("test");
 
-    let apiKey = "0ec94f57e4c94d43a27eb573d1806275";
+    let apiKey = "6e7339bdf9d54b76b9840631d50489b2";
     let apiUrl = `https://api.weatherbit.io/v2.0/current?city=${this.state.city}&key=${apiKey}`;
     console.log(apiUrl);
     axios.get(apiUrl).then(showTemperature);
