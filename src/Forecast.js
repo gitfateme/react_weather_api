@@ -54,8 +54,6 @@ class Forecast extends React.Component {
                 <div className="bg-light pt-4">
                   {this.getTimestampDay(day.ts)}
                 </div>
-                <div className="bg-light pt-4">Wed</div>
-
                 <div className="bg-light">
                   <span className="text-danger">
                     {Math.round(day.app_max_temp)}
