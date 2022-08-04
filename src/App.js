@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import Hero from "./Hero";
-import WeatherCard from "./WeatherCard";
+import Forecast from "./Forecast";
 import HumidityWind from "./HumidityWind";
 import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -22,17 +22,17 @@ class App extends React.Component {
       description: "",
       humidity: null,
       windSpeed: null,
+      forecastCity: "tokyo",
     };
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
   componentDidMount() {
-    console.log("component did mount");
     this.handleSearchSubmit();
   }
 
   handleSearchInputChange(searchValue) {
-    if (searchValue === 'karaj') {
+    if (searchValue === "karaj") {
       this.setState({ city: "krj" });
     } else {
       this.setState({ city: searchValue });
@@ -88,7 +88,6 @@ class App extends React.Component {
 
   handleSearchSubmit() {
     let showTemperature = (r) => {
-      console.log(r.data);
       this.setState({
         loading: false,
         heroCity: r.data.data[0].city_name,
@@ -99,13 +98,12 @@ class App extends React.Component {
         humidity: Math.round(r.data.data[0].rh),
         windSpeed: Math.round(r.data.data[0].wind_spd),
         date: this.showDate(),
+        forecastCity: r.data.data[0].city_name,
       });
+      // console.log(r.data);
     };
-    console.log("test");
-
-    let apiKey = "0ec94f57e4c94d43a27eb573d1806275";
+    let apiKey = "6e7339bdf9d54b76b9840631d50489b2";
     let apiUrl = `https://api.weatherbit.io/v2.0/current?city=${this.state.city}&key=${apiKey}`;
-    console.log(apiUrl);
     axios.get(apiUrl).then(showTemperature);
   }
 
@@ -119,6 +117,7 @@ class App extends React.Component {
     const windSpeed = this.state.windSpeed;
     const loading = this.state.loading;
     const date = this.state.date;
+    const forecastCity = this.state.forecastCity;
     return (
       <div className="App container ">
         <Header
@@ -136,14 +135,7 @@ class App extends React.Component {
           loading={loading}
           date={date}
         />
-        <div className="col-lg-8 offset-lg-2 p-0">
-          <div className="row">
-            <WeatherCard />
-            <WeatherCard />
-            <WeatherCard />
-            <WeatherCard />
-          </div>
-        </div>
+        <Forecast city={forecastCity} />
         <HumidityWind humidity={humidity} wind={windSpeed} />
         <Footer />
       </div>

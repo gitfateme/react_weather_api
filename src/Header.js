@@ -20,7 +20,7 @@ class Header extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.onSearchInpuSubmit(e.target[0].value);
+    this.props.onSearchInpuSubmit();
     e.target[0].value = "";
   }
 
