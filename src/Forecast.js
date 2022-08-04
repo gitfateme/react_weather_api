@@ -31,7 +31,7 @@ class Forecast extends React.Component {
 
   getForecast() {
     let handleResponse = (r) => {
-      // console.log(r.data);
+      console.log(r.data);
       this.setState({
         forecast: r.data.data,
       });

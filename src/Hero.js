@@ -4,6 +4,7 @@ import "./styles/Hero.css";
 import { TailSpin } from "react-loader-spinner";
 
 function Hero(props) {
+
   if (props.loading) {
     return (
       <div className="row Hero">
@@ -25,7 +26,7 @@ function Hero(props) {
               src={`https://www.weatherbit.io/static/img/icons/${props.icon}.png`}
               alt={props.weatherDescription}
             />
-            <h3 className="text-capitalize">{props.weatherDescription}</h3>
+            <h3 className="text-capitalize ps-sm-2 ps-md-5">{props.weatherDescription}</h3>
           </div>
           <h1 className="pt-3">{props.city}</h1>
         </div>
