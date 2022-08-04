@@ -37,7 +37,7 @@ class Forecast extends React.Component {
       });
     };
     let apiKey = "6e7339bdf9d54b76b9840631d50489b2";
-    let apiUrl = `https://api.weatherbit.io/v2.0/forecast/daily?city=${this.props.city}&key=${apiKey}&days=8`;
+    let apiUrl = `https://api.weatherbit.io/v2.0/forecast/daily?city=${this.props.city}&key=${apiKey}&days=4`;
     axios.get(apiUrl).then(handleResponse);
   }
 
