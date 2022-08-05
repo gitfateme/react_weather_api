@@ -14,7 +14,7 @@ class App extends React.Component {
     this.state = {
       loading: true,
       date: "",
-      city: "tokyo",
+      city: this.props.city,
       heroCity: "",
       currentTemp: null,
       heroIcon: "",
@@ -22,7 +22,7 @@ class App extends React.Component {
       description: "",
       humidity: null,
       windSpeed: null,
-      forecastCity: "tokyo",
+      forecastCity: this.props.city,
     };
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);

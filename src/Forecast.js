@@ -56,10 +56,10 @@ class Forecast extends React.Component {
                 </div>
                 <div className="bg-light">
                   <span className="text-danger">
-                    {Math.round(day.app_max_temp)}
+                    {Math.round(day.max_temp)}
                   </span>{" "}
                   <span className="text-primary">
-                    {Math.round(day.app_min_temp)}
+                    {Math.round(day.min_temp)}
                   </span>
                 </div>
                 <div className="bg-light pb-4">
